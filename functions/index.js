@@ -15,7 +15,7 @@ db.once('open', () => {
 });
 
 const projectSchema = new mongoose.Schema({
-  id:   ObjectId,
+  id: String,
   title: String,
   text: String,
   img: String,
@@ -108,7 +108,7 @@ app.put('/projects/:id', async (req, res) => {
 app.delete('/projects/:id', async (req, res) => {
   const projectId = req.params.id;
   try {
-    await Project.findOneAndDelete({ id: projectId });
+    await Project.findOneAndDelete({ _id: projectId });
     res.json({ message: 'Project deleted successfully' });
   } catch (error) {
     console.error(error);
