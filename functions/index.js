@@ -116,6 +116,20 @@ app.delete('/projects/:id', async (req, res) => {
   }
 });
 
+app.get('/projects/:id', async (req, res) => {
+  const projectId = req.params.id;
+  try {
+    const project = await Project.findById(projectId);
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+    res.json(project);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // CRUD Operations for News
 app.get('/news', async (req, res) => {
   try {
@@ -156,6 +170,20 @@ app.delete('/news/:id', async (req, res) => {
   try {
     await News.findOneAndDelete({ id: newsId });
     res.json({ message: 'News deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/news/:id', async (req, res) => {
+  const projectId = req.params.id;
+  try {
+    const project = await News.findById(projectId);
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+    res.json(project);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
