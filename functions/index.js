@@ -14,7 +14,7 @@ db.once('open', () => {
 });
 
 const projectSchema = new mongoose.Schema({
-  id: Number,
+  id: String,
   title: String,
   text: String,
   img: String,
@@ -23,7 +23,7 @@ const projectSchema = new mongoose.Schema({
 });
 
 const newsSchema = new mongoose.Schema({
-  id: Number,
+  id: String,
   title: String,
   text: String,
   img: String,
@@ -32,7 +32,7 @@ const newsSchema = new mongoose.Schema({
 });
 
 const blogSchema = new mongoose.Schema({
-  id: Number,
+  id: String,
   title: String,
   text: String,
   img: String,
