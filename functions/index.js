@@ -200,7 +200,7 @@ app.put('/blogs/:id', async (req, res) => {
 app.delete('/blogs/:id', async (req, res) => {
   const blogId = req.params.id;
   try {
-    await Blog.findOneAndDelete({ id: blogId });
+    await Blog.findOneAndDelete({ _id: blogId });
     res.json({ message: 'Blog deleted successfully' });
   } catch (error) {
     console.error(error);
