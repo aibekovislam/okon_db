@@ -49,7 +49,7 @@ const News = mongoose.model('News', newsSchema);
 const Blog = mongoose.model('Blog', blogSchema);
 
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use((req, res, next) => {
@@ -63,6 +63,35 @@ app.use((req, res, next) => {
     'Content-Type, Authorization'
   );
   next();
+});
+
+app.post('/send-email', (req, res) => {
+  const { fullName, subject, email } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'kultaeva2021@gmail.com',
+      pass: 'kargo2016'
+    }
+  });
+
+  const mailOptions = {
+    from: email,
+    to: 'kultaeva2021@gmail.com',
+    subject: subject,
+    text: `Здравствуйте, ${fullName}! Ваше обращение: ${subject}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Ошибка при отправке письма');
+    } else {
+      console.log('Email отправлен: ' + info.response);
+      res.status(200).send('Письмо успешно отправлено');
+    }
+  });
 });
 
 app.get('/', async (req, res) => {
