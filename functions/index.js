@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { ObjectId } = require('mongodb');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,7 +15,7 @@ db.once('open', () => {
 });
 
 const projectSchema = new mongoose.Schema({
-  id: String,
+  id:   ObjectId,
   title: String,
   text: String,
   img: String,
