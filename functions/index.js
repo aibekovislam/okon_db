@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -44,7 +45,21 @@ const News = mongoose.model('News', newsSchema);
 const Blog = mongoose.model('Blog', blogSchema);
 
 app.use(bodyParser.json());
-// app.use()
+
+app.use(cors());
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, PATCH, DELETE'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization'
+  );
+  next();
+});
 
 app.get('/', async (req, res) => {
   try {
@@ -65,7 +80,6 @@ app.get('/projects', async (req, res) => {
   }
 });
 
-//sdfsd
 app.post('/projects', async (req, res) => {
   const projectData = req.body;
   try {
