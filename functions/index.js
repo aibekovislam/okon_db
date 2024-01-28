@@ -228,6 +228,20 @@ app.put('/blogs/:id', async (req, res) => {
   }
 });
 
+app.get('/blogs/:id', async (req, res) => {
+  const projectId = req.params.id;
+  try {
+    const project = await Blog.findById(projectId);
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+    res.json(project);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 app.delete('/blogs/:id', async (req, res) => {
   const blogId = req.params.id;
   try {
