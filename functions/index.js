@@ -21,6 +21,7 @@ const projectSchema = new mongoose.Schema({
   img: String,
   img1: String,
   text1: String,
+  link: String
 });
 
 const newsSchema = new mongoose.Schema({
@@ -30,6 +31,7 @@ const newsSchema = new mongoose.Schema({
   img: String,
   img1: String,
   text1: String,
+  link: String
 });
 
 const blogSchema = new mongoose.Schema({
@@ -39,6 +41,7 @@ const blogSchema = new mongoose.Schema({
   img: String,
   img1: String,
   text1: String,
+  link: String
 });
 
 const Project = mongoose.model('Project', projectSchema);
